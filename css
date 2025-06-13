@@ -1,0 +1,114 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f8ff; /* Cor de fundo suave */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #4CAF50; /* Borda verde do Agrinho */
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    color: #2E8B57; /* Verde Agrinho */
+}
+
+.roleta-wrapper {
+    position: relative;
+    width: 400px; /* Tamanho da roleta */
+    height: 400px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roleta {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    /* Transição para a animação de giro (será ativada pelo JS) */
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1); /* Animação suave */
+}
+
+.secao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    transform-origin: bottom right; /* Ponto de rotação */
+    transform: rotate(calc(360deg / 7 * var(--i))); /* Rotação baseada na variável --i */
+    background: var(--clr); /* Cor da seção baseada na variável --clr */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); /* Ajuste para ter o formato de fatia de pizza */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Posiciona o texto na ponta da fatia */
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda entre as seções */
+}
+
+/* Para ajustar o formato de fatia de pizza corretamente */
+/* Você precisará de mais regras CSS se o número de seções não for um divisor de 360 perfeito */
+/* Para 7 seções, cada uma terá 360/7 = ~51.42 graus. O clip-path precisa ser ajustado com a trigonometria */
+/* Para simplicidade, vou usar um clip-path genérico que funciona bem para visualização inicial */
+/* E o JavaScript vai cuidar do posicionamento exato da rotação */
+.secao span {
+    position: relative;
+    transform: rotate(calc(360deg / 7 * -0.5)) translateY(-50%); /* Ajusta o texto para ficar reto */
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    font-size: 1.1em;
+}
+
+.ponteiro {
+    position: absolute;
+    top: -30px; /* Posição acima da roleta */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid #DC143C; /* Cor vermelha do ponteiro */
+    z-index: 10; /* Garante que fique acima da roleta */
+}
+
+button {
+    background-color: #4CAF50; /* Botão verde */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#resultado {
+    margin-top: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+}
